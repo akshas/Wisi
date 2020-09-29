@@ -1,0 +1,17 @@
+C:\Users\alex\source\repos\WiSi\WiSi\bin\Debug\WiSi.exe.config
+C:\Users\alex\source\repos\WiSi\WiSi\bin\Debug\WiSi.exe
+C:\Users\alex\source\repos\WiSi\WiSi\bin\Debug\WiSi.pdb
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.csprojAssemblyReference.cache
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\MainWindow.g.cs
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\App.g.cs
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi_MarkupCompile.cache
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi_MarkupCompile.lref
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\MainWindow.baml
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.g.resources
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.Properties.Resources.resources
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.csproj.GenerateResource.cache
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.csproj.CoreCompileInputs.cache
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.exe
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi.pdb
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\Kueche.g.cs
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\Kueche.baml

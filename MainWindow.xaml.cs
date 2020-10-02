@@ -25,27 +25,60 @@ namespace WiSi
         Random r = new Random();
         DispatcherTimer clock = new DispatcherTimer();
         string ImagePath = @"C:\Users\alex\source\repos\WiSi\WiSi\images\Rotes_Rathaus.png";
-        ImageBrush BrushElement;
+
+        public int AnzahlWorkers { get; set; } = 3;
+
         Kueche kueche = new Kueche();
+        RessourcenWindow res = new RessourcenWindow();
+        //Einwohner eins = new Einwohner();
+        //Einwohner zwei = new Einwohner();
+        
 
 
+        DBConnection conn = new DBConnection();
+        
         public MainWindow()
         {
+            this.DataContext = this;
+
             InitializeComponent();
+            Einwohner.StartEinwohnerErzeugen();
+            WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
+            Ressource.RessourcenErzeugen();
+            RessourcenDisplay.ItemsSource = Ressource.ResList;
+
             kueche.Width = 500;
             kueche.Height = 200;
-            kueche.Left = 75;
-            kueche.Top = 720;
-            
+            //kueche.Left = Application.Current.MainWindow.Left;
+            //kueche.Top = Application.Current.MainWindow.Top + Application.Current.MainWindow.ActualHeight;
+            kueche.Topmost = true;
+
+            res.Width = 500;
+            res.Height = 200;
+            res.Topmost = true;
+
+            clock.Tick += MainEventTimer;
+            clock.Interval = TimeSpan.FromSeconds(1);
+            StartGame();
+        }
+        private void MainEventTimer(object sender, EventArgs e)
+        {
+            foreach (Einwohner mensch in Einwohner.EinwohnerList)
+            {
+                mensch.Essen(Ressource.Brot);
+                mensch.Essen(Ressource.Milch);
+            }
         }
 
 
 
+      
+        
+        #region Canvas Bearbeitung ---------------------------------
 
 
 
 
-        #region Canvas Bearbeitung
         private void AddOrRemoveItems(object sender, MouseButtonEventArgs e)
         {
             if(e.OriginalSource is Rectangle)
@@ -102,8 +135,36 @@ namespace WiSi
                 case "Kueche":
                     kueche.Show();
                     break;
+                case "Ressourcen":
+                    res.Show();
+                    break;
+                case "Worker":
+                    Einwohner.Erzeugen();
+                    var text = WorkerBlock.Children.OfType<TextBlock>();
+                    text.ToArray()[0].Text = Einwohner.Anzahl.ToString();
+                    break;
             }
         }
         #endregion
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            kueche.canClose = true;
+            kueche.Close();
+            res.canClose = true;
+            res.Close();
+
+        }
+
+        private void StartGame()
+        {
+            clock.Start();
+        }
+        
+        private void EndGame()
+        {
+            clock.Stop();
+        }
+
     }
 }

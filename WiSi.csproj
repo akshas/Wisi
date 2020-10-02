@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DBConnection.cs" />
+    <Compile Include="Ressource.cs" />
+    <Compile Include="RessourcenWindow.xaml.cs">
+      <DependentUpon>RessourcenWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Kueche.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,8 +81,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RessourcenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Marktplatz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,9 +114,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="house.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\house.png" />
     <Resource Include="images\sprites\cover-iso-house.png" />
     <Resource Include="images\sprites\Isometric-Houses-1-flip.png" />
@@ -121,6 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\kueche.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\worker.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WiSi"
         mc:Ignorable="d"
-        Title="Kueche" Height="450" Width="800">
+        Title="Kueche" Height="450" Width="800" Closing="OnWindowClosing">
     <Grid Background="Crimson">
-        <TextBlock Text="Das ist eine Küche" FontSize="30" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/> 
+        <TextBlock Text="Das ist eine Küche" FontSize="30" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Top}"/>
     </Grid>
 </Window>

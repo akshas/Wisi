@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace WiSi
 {
-    class Gebaeude
+
+
+    abstract class Gebaeude
     {
         public string Position { get; set; }
+        public int Level { get; set; }
 
-        public int Fassungsvermoegen { get; set; }
+        abstract public int Anzahl{get; set;}
+        abstract public int Fassungsvermoegen { get; set; }
 
 
+        
     }
 }

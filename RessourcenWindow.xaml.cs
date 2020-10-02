@@ -11,24 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Data;
+
 
 namespace WiSi
 {
     /// <summary>
-    /// Interaction logic for Kueche.xaml
+    /// Interaction logic for RessourcenWindow.xaml
     /// </summary>
-    public partial class Kueche : Window
+    public partial class RessourcenWindow : Window
     {
-        public bool canClose = false;
-        public Kueche()
+       public bool canClose = false;
+        DBConnection conn = new DBConnection();
+        public RessourcenWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            RessourcenTable.ItemsSource = Ressource.ResList;
         }
-
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!canClose)
+            if(!canClose)
             {
                 e.Cancel = true;
                 this.Hide();

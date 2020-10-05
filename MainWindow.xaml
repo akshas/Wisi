@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WiSi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="850" Width="1200" Closing="Window_Closing">
+        Title="MainWindow" Height="850" Width="1050" Closing="Window_Closing" ResizeMode="CanMinimize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </Window.Resources>
         <Canvas x:Name="MainCanvas" Background="LightYellow" MouseMove="OnMouseMove" Focusable="True" MouseLeftButtonDown="AddOrRemoveItems" >
             
             <StackPanel Canvas.Right="10" Orientation="Horizontal">
@@ -16,7 +23,7 @@
             <StackPanel x:Name="Menu" >
 
                 <Button x:Name="Rathaus" Click="MenuButtonClicked">
-                    <Image Source="C:\Users\alex\source\repos\WiSi\WiSi\images\Rotes_Rathaus.png"  Width="60" />
+                <Image Source="pack://application:,,,/images\townHall.png"  Width="60" />
                 </Button>
                 <Button x:Name="Haus" Click="MenuButtonClicked">
                     <Image Source="C:\Users\alex\source\repos\WiSi\WiSi\images\house.png" Width="60"/>
@@ -25,10 +32,10 @@
                    <Button x:Name="Worker" Click="MenuButtonClicked">
                         <Image Source="C:\Users\alex\source\repos\WiSi\WiSi\images\worker.jpg" Width="60"/>
                    </Button>
-                    <TextBlock x:Name="WorkersAnzahlText"/>
+                    <TextBlock x:Name="WorkersAnzahlText" FontSize="18" FontWeight="Bold"/>
                 </StackPanel>
                 <Button x:Name="Kueche" Click="MenuButtonClicked">
-                    <Image Source="C:\Users\alex\source\repos\WiSi\WiSi\images\soup_spoon.jpg" Width="60"/>
+                <Image Source="pack://application:,,,/images\soup_spoon.jpg" Width="60"/>
                 </Button>
                 <Button x:Name="Ressourcen" Click="MenuButtonClicked">
                     <Image Source="C:\Users\alex\source\repos\WiSi\WiSi\images\ressources.jpg" Width="60"/>

@@ -17,6 +17,9 @@ namespace WiSi
         public int Id { get; set; }
         public string Name {get; set;}
         public int Anzahl {get; set;}
+        public double Verkaufspreis { get; set; }
+        public double Einkaufspreis { get; set; }
+
         public static Ressource Brot;
         public static Ressource Milch;
         public static Ressource Stein;
@@ -24,13 +27,14 @@ namespace WiSi
         public static Ressource Holz;
         public static Ressource Gold;
 
+        public static DataTable ress;
+
         public static ObservableCollection<Ressource> ResList = new ObservableCollection<Ressource>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Ressource(int id)
         {
-            DataTable ress = DBConnection.SelectRes();
             DataRow row = ress.Select("Id = " + id)[1];
             Id = (int)row["Id"];
             Name = (string)row["Name"];
@@ -40,6 +44,8 @@ namespace WiSi
 
         public static void RessourcenErzeugen()
         {
+            ress = DBConnection.SelectRes();
+
             Brot = new Ressource(1);
             Milch = new Ressource(2);
             Stein = new Ressource(3);

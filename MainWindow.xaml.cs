@@ -24,14 +24,12 @@ namespace WiSi
         Brush Customcolor;
         Random r = new Random();
         DispatcherTimer clock = new DispatcherTimer();
-        string ImagePath = @"C:\Users\alex\source\repos\WiSi\WiSi\images\Rotes_Rathaus.png";
-
-        public int AnzahlWorkers { get; set; } = 3;
-
+        string ImagePath = @"pack://application:,,,/images\townHall.png";
+        MartkplatzWindow markt = new MartkplatzWindow();
         Kueche kueche = new Kueche();
         RessourcenWindow res = new RessourcenWindow();
-        //Einwohner eins = new Einwohner();
-        //Einwohner zwei = new Einwohner();
+        int EinwohnerLeftPos = 100;
+        int EinwohnerTopPos = 150;
         
 
 
@@ -39,18 +37,10 @@ namespace WiSi
         
         public MainWindow()
         {
-            this.DataContext = this;
 
-            InitializeComponent();
-            Einwohner.StartEinwohnerErzeugen();
-            WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
-            Ressource.RessourcenErzeugen();
-            RessourcenDisplay.ItemsSource = Ressource.ResList;
 
             kueche.Width = 500;
             kueche.Height = 200;
-            //kueche.Left = Application.Current.MainWindow.Left;
-            //kueche.Top = Application.Current.MainWindow.Top + Application.Current.MainWindow.ActualHeight;
             kueche.Topmost = true;
 
             res.Width = 500;
@@ -68,6 +58,10 @@ namespace WiSi
                 mensch.Essen(Ressource.Brot);
                 mensch.Essen(Ressource.Milch);
             }
+            if (Ressource.Brot.Anzahl < 0 || Ressource.Milch.Anzahl < 0)
+            {
+                EndGame();
+            }
         }
 
 
@@ -81,15 +75,15 @@ namespace WiSi
 
         private void AddOrRemoveItems(object sender, MouseButtonEventArgs e)
         {
-            if(e.OriginalSource is Rectangle)
-            {
-                Rectangle activeRect = (Rectangle)e.OriginalSource;
-                MainCanvas.Children.Remove(activeRect);
-            }
-            else
-            {
-                CreateElement(ImagePath);
-            }
+            //if(e.OriginalSource is Rectangle)
+            //{
+            //    Rectangle activeRect = (Rectangle)e.OriginalSource;
+            //    MainCanvas.Children.Remove(activeRect);
+            //}
+            //else
+            //{
+            //CreateElement(ImagePath);
+            //}
         }
         private void CreateElement(string ImagePath)
         {
@@ -138,8 +132,11 @@ namespace WiSi
                 case "Ressourcen":
                     res.Show();
                     break;
+                case "MarktBtn":
+                    markt.Show();
+                    break;
                 case "Worker":
-                    Einwohner.Erzeugen();
+                    EinwhonerErzeugen();
                     var text = WorkerBlock.Children.OfType<TextBlock>();
                     text.ToArray()[0].Text = Einwohner.Anzahl.ToString();
                     break;
@@ -147,18 +144,81 @@ namespace WiSi
         }
         #endregion
 
+
+        #region Erzeugen Elemente
+        /// <summary>
+        /// Einwohner Erzeugen
+        /// </summary>
+        private void EinwhonerErzeugen()
+        {
+            if (Ressource.Brot.Anzahl > (Einwohner.Anzahl * 60) && Ressource.Milch.Anzahl > (Einwohner.Anzahl * 60))
+            {
+                new Einwohner(Einwohner.Anzahl + 1);
+            }
+            else
+            {
+                MessageBox.Show("Es gibt nicht genug Nahrungsmittel");
+            }
+        }
+
+        private void MarktplatzErzeugen() {
+
+            Button mpBtn = new Button();
+            Marktplatz marktPlatz = new Marktplatz();
+            mpBtn.Content = marktPlatz.Bild;
+            mpBtn.Name = "MarktBtn";
+            Canvas.SetLeft(mpBtn, marktPlatz.Position.left);
+            Canvas.SetTop(mpBtn, marktPlatz.Position.top);
+            
+            
+            mpBtn.Click += MenuButtonClicked;
+            MainCanvas.Children.Add(mpBtn);
+        }
+
+        #endregion
+
+//-------------------------------------------------------------------------------------------------------
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             kueche.canClose = true;
             kueche.Close();
             res.canClose = true;
             res.Close();
+            markt.canClose = true;
+            markt.Close();
 
         }
 
+        /// <summary>
+        /// START GAME
+        /// </summary>
         private void StartGame()
         {
+            InitializeComponent();
+            Einwohner.StartEinwohnerErzeugen();
+            WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
+            Ressource.RessourcenErzeugen();
+            RessourcenDisplay.ItemsSource = Ressource.ResList;
+
+            MarktplatzErzeugen();
+
+            foreach (Einwohner mensch in Einwohner.EinwohnerList)
+            {
+                mensch.Form = new Rectangle
+                {
+                    Width = 40,
+                    Height = 40,
+                    Fill = Brushes.Aqua
+                };
+
+                Canvas.SetLeft(mensch.Form, EinwohnerLeftPos);
+                Canvas.SetTop(mensch.Form, EinwohnerTopPos);
+                MainCanvas.Children.Add(mensch.Form);
+                EinwohnerLeftPos += 50;
+            }
             clock.Start();
+
         }
         
         private void EndGame()

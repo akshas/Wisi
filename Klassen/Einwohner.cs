@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace WiSi
 {
@@ -15,6 +17,7 @@ namespace WiSi
         public int Gesundheit { get; set; }
         public int Geschwindigkeit { get; set; }
 
+        public Rectangle Form { get; set; }
         public int Id { get; set; }
         public int RessourceId { get; set; } = 0;
 
@@ -34,9 +37,15 @@ namespace WiSi
         }
         public Einwohner(int index)
         {
-            if(EinwohnerList.Count == 0)
-                this.Id = index;
-
+            Id = index;
+            Form = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Fill = Brushes.Aqua,
+                Name = "Einwohner_" + Id
+            };
+            
             EinwohnerList.Add(this);
             Anzahl++;
         }
@@ -52,6 +61,7 @@ namespace WiSi
         {
 
         }
+
 
         public void Essen (Ressource res)
         {
@@ -74,24 +84,10 @@ namespace WiSi
         /// </summary>
         public static void StartEinwohnerErzeugen()
         {
-            for (int i = 1; i < StartAnzahl + 1; i++)
+            for (int i = 1; i <= StartAnzahl; i++)
             {
                 new Einwohner(i);
             }
         }
-
-        public static void Erzeugen()
-        {
-            if (Ressource.Brot.Anzahl > (Anzahl * 60) && Ressource.Milch.Anzahl > (Anzahl * 60))
-            {
-                new Einwohner(Anzahl + 1);
-            }
-            else
-            {
-                MessageBox.Show("Es gibt nicht genug Nahrungsmittel");
-            }
-
-        }
-
     }
 }

@@ -17,3 +17,5 @@ C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\Kueche.g.cs
 C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\Kueche.baml
 C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\RessourcenWindow.g.cs
 C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\RessourcenWindow.baml
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\MartkplatzWindow.g.cs
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\MartkplatzWindow.baml

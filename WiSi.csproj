@@ -56,7 +56,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DBConnection.cs" />
-    <Compile Include="Ressource.cs" />
+    <Compile Include="Klassen\Ressource.cs" />
+    <Compile Include="MartkplatzWindow.xaml.cs">
+      <DependentUpon>MartkplatzWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RessourcenWindow.xaml.cs">
       <DependentUpon>RessourcenWindow.xaml</DependentUpon>
     </Compile>
@@ -72,8 +75,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Einwohner.cs" />
-    <Compile Include="Gebaeude.cs" />
+    <Compile Include="Klassen\Einwohner.cs" />
+    <Compile Include="Klassen\Gebaeude.cs" />
     <Compile Include="Kueche.xaml.cs">
       <DependentUpon>Kueche.xaml</DependentUpon>
     </Compile>
@@ -81,13 +84,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MartkplatzWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RessourcenWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Marktplatz.cs" />
+    <Compile Include="Klassen\Marktplatz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,6 +138,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\worker.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Markt2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\townHall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Markt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\RessourcenIcons\" />
+    <Folder Include="Subwindows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

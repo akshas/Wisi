@@ -15,8 +15,5 @@ namespace WiSi
 
         abstract public int Anzahl{get; set;}
         abstract public int Fassungsvermoegen { get; set; }
-
-
-        
     }
 }

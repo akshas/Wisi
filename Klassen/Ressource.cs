@@ -9,6 +9,7 @@ using System.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace WiSi
 {
@@ -19,6 +20,9 @@ namespace WiSi
         public int Anzahl {get; set;}
         public double Verkaufspreis { get; set; }
         public double Einkaufspreis { get; set; }
+        public int AnzahlZumVerkaufen { get; set; }
+        public int AnzahlZumKaufen { get; set; }
+
 
         public static Ressource Brot;
         public static Ressource Milch;
@@ -40,18 +44,19 @@ namespace WiSi
             Name = (string)row["Name"];
             Anzahl = (int)row["LagerAnzahl"];
             ResList.Add(this);
+            //MessageBox.Show(this.Einkaufspreis.ToString()); 
         }
 
         public static void RessourcenErzeugen()
         {
             ress = DBConnection.SelectRes();
 
-            Brot = new Ressource(1);
-            Milch = new Ressource(2);
-            Stein = new Ressource(3);
-            Eisen = new Ressource(4);
-            Holz = new Ressource(5);
-            Gold = new Ressource(6);
+            Brot = new Ressource(1) { Einkaufspreis = 20, Verkaufspreis = 15};
+            Milch = new Ressource(2){ Einkaufspreis = 30, Verkaufspreis = 24};
+            Stein = new Ressource(3){ Einkaufspreis = 50, Verkaufspreis = 45};
+            Eisen = new Ressource(4){ Einkaufspreis = 70, Verkaufspreis = 65};
+            Holz = new Ressource(5){ Einkaufspreis = 40, Verkaufspreis = 35};
+            Gold = new Ressource(6){ Einkaufspreis = 60, Verkaufspreis = 55};
         }
         public void OnPropCh([CallerMemberName] string name = "")
         {

@@ -20,9 +20,24 @@ namespace WiSi
     public partial class MartkplatzWindow : Window
     {
         public bool canClose = false;
+        //Ressource Brot = Ressource.Brot;
+        //double BrotPreis = Ressource.Brot.Einkaufspreis;
+        //double EisenPreis = Ressource.Eisen.Einkaufspreis;
+        //double HolzPreis = Ressource.Holz.Einkaufspreis;
+        //double MilchPreis = Ressource.Milch.Einkaufspreis;
+        //double SteinPreis = Ressource.Stein.Einkaufspreis;
+
         public MartkplatzWindow()
         {
             InitializeComponent();
+
+       
+            //DisplaySteinPreis.Text = "Stein: " + SteinPreis.ToString();
+            //DisplayEisenPreis.Text = "Eisen: " + EisenPreis.ToString();
+            //DisplayHolzPreis.Text = "Holz: " + HolzPreis.ToString();
+            //DisplayMilchPreis.Text = "Milch: " + MilchPreis.ToString();
+            //DisplayBrotPreis.Text = "Brot: " + BrotPreis.ToString();
+            //MessageBox.Show(Brot.Name.ToString());
         }
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -31,6 +46,21 @@ namespace WiSi
                 e.Cancel = true;
                 this.Hide();
             }
+        }
+
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            switch(tb.Name)
+            {
+                case "DisplaySteinPreis":
+                    break;
+            }
+        }
+
+        private void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

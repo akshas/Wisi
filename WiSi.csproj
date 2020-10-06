@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DBConnection.cs" />
+    <Compile Include="Klassen\DBConnection.cs" />
     <Compile Include="Klassen\Ressource.cs" />
     <Compile Include="MartkplatzWindow.xaml.cs">
       <DependentUpon>MartkplatzWindow.xaml</DependentUpon>
@@ -149,8 +149,14 @@
     <Resource Include="images\Markt.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images\RessourcenIcons\" />
     <Folder Include="Subwindows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\RessourcenIcons\BrotIcon.png" />
+    <Resource Include="images\RessourcenIcons\HolzIcon.png" />
+    <Resource Include="images\RessourcenIcons\IronIcon.png" />
+    <Resource Include="images\RessourcenIcons\MilchIcon.png" />
+    <Resource Include="images\RessourcenIcons\SteinIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

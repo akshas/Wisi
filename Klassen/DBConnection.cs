@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace WiSi
 {
-     class DBConnection
+    class DBConnection
     {
         static SqlConnection conn;
         static SqlDataAdapter adapter;

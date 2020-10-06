@@ -8,10 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/ressourcenicons/broticon.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/ressourcenicons/holzicon.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/ressourcenicons/ironicon.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/ressourcenicons/milchicon.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/ressourcenicons/steinicon.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/soup_spoon.jpg")]
 
 

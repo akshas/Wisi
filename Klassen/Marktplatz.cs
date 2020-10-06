@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
+using System.Windows;
 
 namespace WiSi
 {
@@ -28,8 +29,8 @@ namespace WiSi
         ImageBrush  element = new ImageBrush();
         public Rectangle Bild;
 
-        public static Dictionary<Ressource, int> DingeZumKaufen = new Dictionary<Ressource, int>();
-        public static Dictionary<Ressource, int> DingeZumVerkaufen = new Dictionary<Ressource, int>();
+        public  Dictionary<Ressource, int> DingeZumKaufen = new Dictionary<Ressource, int>();
+        public  Dictionary<Ressource, int> DingeZumVerkaufen = new Dictionary<Ressource, int>();
         public Marktplatz()
         {
             element.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.Absolute));
@@ -45,12 +46,24 @@ namespace WiSi
             Position.top = 300;
         }
 
-        public void Kaufen(Dictionary<string, int> zumKaufen)
+        public void Kaufen(Dictionary<Ressource, int> zumKaufen)
         {
- 
+            foreach (var item in zumKaufen)
+            {
+                if (item.Key != Ressource.Gold)
+                {
+                    item.Key.Anzahl += item.Value;
+                    item.Key.OnPropCh(nameof(item.Key.Anzahl));
+                }
+                else
+                {
+                    item.Key.Anzahl -= item.Value;
+                    item.Key.OnPropCh(nameof(item.Key.Anzahl));
+                }
+            }
         }
 
-        public void Verkaufen(Dictionary<string, int> zumVerkaufen)
+        public void Verkaufen(Dictionary<Ressource, int> zumVerkaufen)
         {
 
         }

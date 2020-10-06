@@ -51,17 +51,16 @@ namespace WiSi
         {
             ress = DBConnection.SelectRes();
 
-            Brot = new Ressource(1) { Einkaufspreis = 20, Verkaufspreis = 15};
-            Milch = new Ressource(2){ Einkaufspreis = 30, Verkaufspreis = 24};
-            Stein = new Ressource(3){ Einkaufspreis = 50, Verkaufspreis = 45};
-            Eisen = new Ressource(4){ Einkaufspreis = 70, Verkaufspreis = 65};
-            Holz = new Ressource(5){ Einkaufspreis = 40, Verkaufspreis = 35};
-            Gold = new Ressource(6){ Einkaufspreis = 60, Verkaufspreis = 55};
+            Brot = new Ressource(1) { Einkaufspreis = 2, Verkaufspreis = 1.5};
+            Milch = new Ressource(2){ Einkaufspreis = 3, Verkaufspreis = 2.4};
+            Stein = new Ressource(3){ Einkaufspreis = 5, Verkaufspreis = 4.5};
+            Eisen = new Ressource(4){ Einkaufspreis = 7, Verkaufspreis = 6.5};
+            Holz = new Ressource(5){ Einkaufspreis = 4, Verkaufspreis = 3.5};
+            Gold = new Ressource(6){ Einkaufspreis = 6, Verkaufspreis = 5.5};
         }
         public void OnPropCh([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
         }
     }
 }

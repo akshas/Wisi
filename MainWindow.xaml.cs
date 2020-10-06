@@ -25,14 +25,12 @@ namespace WiSi
         Random r = new Random();
         DispatcherTimer clock = new DispatcherTimer();
         string ImagePath = @"pack://application:,,,/images\townHall.png";
-        MartkplatzWindow markt = new MartkplatzWindow();
+        MartkplatzWindow markt;
         Kueche kueche = new Kueche();
         RessourcenWindow res = new RessourcenWindow();
         int EinwohnerLeftPos = 100;
         int EinwohnerTopPos = 150;
         
-
-
         DBConnection conn = new DBConnection();
         
         public MainWindow()
@@ -190,6 +188,7 @@ namespace WiSi
 
         }
 
+
         /// <summary>
         /// START GAME
         /// </summary>
@@ -200,7 +199,7 @@ namespace WiSi
             WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
             Ressource.RessourcenErzeugen();
             RessourcenDisplay.ItemsSource = Ressource.ResList;
-
+            markt = new MartkplatzWindow();
             MarktplatzErzeugen();
 
             foreach (Einwohner mensch in Einwohner.EinwohnerList)

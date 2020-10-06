@@ -63,7 +63,7 @@
                         <StackPanel Grid.Row="1" Style="{StaticResource Zelle}" >
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="pack://application:,,,/images/RessourcenIcons/IronIcon.png" Width="80"   />
-                                <TextBox x:Name="AnzahlEisenKaufen" Margin="30 0"/>
+                                <TextBox x:Name="AnzahlEisenKaufen" Margin="30 0"  TextChanged="OnTextChanged" LostFocus="OnLostFocus"/>
                             </StackPanel>    
                         </StackPanel>
 
@@ -71,7 +71,7 @@
                         <StackPanel Grid.Row="2" Style="{StaticResource Zelle}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="pack://application:,,,/images/RessourcenIcons/HolzIcon.png" Width="100"   />
-                                <TextBox x:Name="AnzahlHolzKaufen"/>
+                                <TextBox x:Name="AnzahlHolzKaufen"  TextChanged="OnTextChanged" LostFocus="OnLostFocus"/>
                             </StackPanel>    
                         </StackPanel>
 
@@ -83,7 +83,7 @@
                         <StackPanel Grid.Column="1" Style="{StaticResource Zelle}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="pack://application:,,,/images/RessourcenIcons/Broticon.png" Width="100"   />
-                                <TextBox x:Name="AnzahlBrotKaufen" />
+                                <TextBox x:Name="AnzahlBrotKaufen"  TextChanged="OnTextChanged" LostFocus="OnLostFocus" />
                             </StackPanel>    
                         </StackPanel>
                         
@@ -91,7 +91,7 @@
                         <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource Zelle}" >
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="pack://application:,,,/images/RessourcenIcons/MilchIcon.png" Height="80" Width="100"  />
-                                <TextBox x:Name="AnzahlMilchKaufen"/>
+                                <TextBox x:Name="AnzahlMilchKaufen"  TextChanged="OnTextChanged" LostFocus="OnLostFocus" />
                             </StackPanel>
                         </StackPanel>
 
@@ -111,10 +111,10 @@
                             <TextBlock x:Name="DisplayHolzPreis" Text="Holz: " />
                             <TextBlock x:Name="DisplayBrotPreis" Text="Brot: " />
                             <TextBlock x:Name="DisplayMilchPreis" Text="Milch: " />
-                            <TextBlock x:Name="GesamtPreis" Text="Zusammen: " Foreground="Red" />
+                            <TextBlock x:Name="DisplayGesamtPreis" Text="Summe: " Foreground="Red" />
                         </StackPanel>
                         <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                            <Button Content="Kaufen" Width="150" Height="30" BorderThickness="0" Background="Beige" Foreground="Green" FontWeight="SemiBold" FontSize="17"/>
+                            <Button Content="Kaufen" Width="150" Height="30" BorderThickness="0" Background="Beige" Foreground="Green" FontWeight="SemiBold" FontSize="17" Click="OnKaufenClick"/>
                         </StackPanel>
 
                     </Grid>

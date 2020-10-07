@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using WiSi.Klassen;
 
 namespace WiSi
 {
@@ -25,12 +26,17 @@ namespace WiSi
         Random r = new Random();
         DispatcherTimer clock = new DispatcherTimer();
         string ImagePath = @"pack://application:,,,/images\townHall.png";
+
+        Rathaus rathaus;
         MartkplatzWindow markt;
         Kueche kueche = new Kueche();
+
         RessourcenWindow res = new RessourcenWindow();
-        int EinwohnerLeftPos = 100;
-        int EinwohnerTopPos = 150;
-        
+
+
+        int EinwohnerLeftPos = 420;
+        int EinwohnerTopPos = 285;
+
         DBConnection conn = new DBConnection();
         
         public MainWindow()
@@ -51,6 +57,7 @@ namespace WiSi
         }
         private void MainEventTimer(object sender, EventArgs e)
         {
+
             foreach (Einwohner mensch in Einwohner.EinwohnerList)
             {
                 mensch.Essen(Ressource.Brot);
@@ -73,15 +80,15 @@ namespace WiSi
 
         private void AddOrRemoveItems(object sender, MouseButtonEventArgs e)
         {
-            //if(e.OriginalSource is Rectangle)
-            //{
-            //    Rectangle activeRect = (Rectangle)e.OriginalSource;
-            //    MainCanvas.Children.Remove(activeRect);
-            //}
-            //else
-            //{
-            //CreateElement(ImagePath);
-            //}
+            if (e.OriginalSource is Rectangle)
+            {
+                Rectangle activeRect = (Rectangle)e.OriginalSource;
+                MainCanvas.Children.Remove(activeRect);
+            }
+            else
+            {
+                CreateElement(ImagePath);
+            }
         }
         private void CreateElement(string ImagePath)
         {
@@ -111,6 +118,7 @@ namespace WiSi
             displayLeft.Text = "Left: " + left;
             displayTop.Text = "   Top: " + top;
         }
+        #endregion
 
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -125,13 +133,34 @@ namespace WiSi
                     ImagePath = @"C:\Users\alex\source\repos\WiSi\WiSi\images\house.png";
                     break;
                 case "Kueche":
-                    kueche.Show();
+                    if (kueche.hidden)
+                    {
+                        kueche.Show();
+                        kueche.hidden = false;
+                    }
+                    else
+                    {
+                        kueche.Close();
+                        kueche.hidden = true;
+                    }
                     break;
                 case "Ressourcen":
                     res.Show();
                     break;
                 case "MarktBtn":
-                    markt.Show();
+                    if (markt.hidden)
+                    {
+                        markt.Show();
+                        markt.hidden = false;
+                    }
+                    else
+                    {
+                        markt.Close();
+                        markt.hidden = true;
+                    }
+                    break;
+                case "RathausBtn":
+                    rathaus.ShowStatistic();
                     break;
                 case "Worker":
                     EinwhonerErzeugen();
@@ -140,7 +169,6 @@ namespace WiSi
                     break;
             }
         }
-        #endregion
 
 
         #region Erzeugen Elemente
@@ -173,9 +201,23 @@ namespace WiSi
             MainCanvas.Children.Add(mpBtn);
         }
 
+        private void RathausErzeugen()
+        {
+            Button rhBtn = new Button();
+            rathaus = new Rathaus("Rathaus");
+            rhBtn.Content = rathaus.Bild;
+            rhBtn.Name = "RathausBtn";
+            Canvas.SetLeft(rhBtn, rathaus.Position.left);
+            Canvas.SetTop(rhBtn, rathaus.Position.top);
+
+            rhBtn.Click += MenuButtonClicked;
+            MainCanvas.Children.Add(rhBtn);
+
+        }
+
         #endregion
 
-//-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -195,27 +237,35 @@ namespace WiSi
         private void StartGame()
         {
             InitializeComponent();
-            Einwohner.StartEinwohnerErzeugen();
-            WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
+
+            // -- Rathaus --
+            RathausErzeugen();
+
+            // -- Markt --
             Ressource.RessourcenErzeugen();
             RessourcenDisplay.ItemsSource = Ressource.ResList;
             markt = new MartkplatzWindow();
             MarktplatzErzeugen();
 
+            // -- Einwohner --
+            Einwohner.StartEinwohnerErzeugen();
+            WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
             foreach (Einwohner mensch in Einwohner.EinwohnerList)
             {
-                mensch.Form = new Rectangle
-                {
-                    Width = 40,
-                    Height = 40,
-                    Fill = Brushes.Aqua
-                };
+                //mensch.Form = new Rectangle
+                //{
+                //    Width = 30,
+                //    Height = 30,
+                //    Fill = Brushes.Aqua
+                //};
 
                 Canvas.SetLeft(mensch.Form, EinwohnerLeftPos);
                 Canvas.SetTop(mensch.Form, EinwohnerTopPos);
                 MainCanvas.Children.Add(mensch.Form);
                 EinwohnerLeftPos += 50;
             }
+
+            // -- Timer --
             clock.Start();
 
         }

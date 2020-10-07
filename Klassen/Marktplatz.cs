@@ -10,11 +10,12 @@ using System.Windows;
 
 namespace WiSi
 {
-        struct MarktPosition
-        {
-            public int top;
-            public int left;
-        }
+    struct MarktPosition
+    {
+        public int top;
+        public int left;
+    }
+
     class Marktplatz
     {
         //Preise
@@ -25,7 +26,7 @@ namespace WiSi
         public double MilchEinkaufsPreis { get; private set; } = 30;
 
         public MarktPosition Position;
-        string ImagePath = "pack://application:,,,/images/Markt.png";
+        string ImagePath = "pack://application:,,,/images/Markt3.png";
         ImageBrush  element = new ImageBrush();
         public Rectangle Bild;
 
@@ -41,9 +42,10 @@ namespace WiSi
                 Fill = element,
                 Name = "Marktplatz"
             };
+
             Position = new MarktPosition();
-            Position.left = 300;
-            Position.top = 300;
+            Position.left = 600;
+            Position.top = 500;
         }
 
         public void Kaufen(Dictionary<Ressource, int> zumKaufen)
@@ -65,7 +67,19 @@ namespace WiSi
 
         public void Verkaufen(Dictionary<Ressource, int> zumVerkaufen)
         {
-
+            foreach (var item in zumVerkaufen)
+            {
+                if (item.Key != Ressource.Gold)
+                {
+                    item.Key.Anzahl -= item.Value;
+                    item.Key.OnPropCh(nameof(item.Key.Anzahl));
+                }
+                else
+                {
+                    item.Key.Anzahl += item.Value;
+                    item.Key.OnPropCh(nameof(item.Key.Anzahl));
+                }
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WiSi"
         mc:Ignorable="d"
-        Title="Martkplatz" Height="350" Width="600" Topmost="True" Closing="OnWindowClosing">
+        Title="Martkplatz" Height="350" Width="600" Topmost="True" Closing="OnWindowClosing" WindowStyle="None" >
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Width" Value="50"/>
@@ -26,8 +26,8 @@
             <Setter Property="Margin" Value="0 13 0 0" />
         </Style>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid MouseLeftButtonDown="OnMouseLeftButtonDown">
         <TabControl>
             <TabItem Header="Kaufen" Background="LightBlue" Foreground="Green">
                 <Grid>
@@ -114,7 +114,7 @@
                             <TextBlock x:Name="DisplayGesamtPreis" Text="Summe: " Foreground="Red" />
                         </StackPanel>
                         <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                            <Button Content="Kaufen" Width="150" Height="30" BorderThickness="0" Background="Beige" Foreground="Green" FontWeight="SemiBold" FontSize="17" Click="OnKaufenClick"/>
+                            <Button Content="Kaufen" Width="150" Height="30" BorderThickness="0" Background="LightBlue" Foreground="Green" FontWeight="SemiBold" FontSize="17" Click="OnKaufenClick"/>
                         </StackPanel>
 
                     </Grid>
@@ -123,7 +123,96 @@
             </TabItem>
             <!-- VERKAUFEN TAB -->
             <TabItem Header="Verkaufen"  Background="LightCoral" Foreground="Red">
-                <TextBox x:Name="test"/>
+                <Grid>
+                    <!--#region  ColumnRowDefinitions-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <!--#endregion-->
+
+                        <!--#region RESSOURSEN DARSTELLUNG -->
+                        <!-- VERKAUFEN LEFT COLUMN-->
+
+                        <!-- Zelle 1 -->
+                        <StackPanel Style="{StaticResource Zelle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="pack://application:,,,/images/RessourcenIcons/Steinicon.png" Width="100"   />
+                                <TextBox x:Name="AnzahlSteinVerkaufen" TextChanged="OnTextChanged" LostFocus="OnLostFocus"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Zelle 2 -->
+                        <StackPanel Grid.Row="1" Style="{StaticResource Zelle}" >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="pack://application:,,,/images/RessourcenIcons/IronIcon.png" Width="80"   />
+                                <TextBox x:Name="AnzahlEisenVerkaufen" Margin="30 0"  TextChanged="OnTextChanged" LostFocus="OnLostFocus"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Zelle 3 -->
+                        <StackPanel Grid.Row="2" Style="{StaticResource Zelle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="pack://application:,,,/images/RessourcenIcons/HolzIcon.png" Width="100"   />
+                                <TextBox x:Name="AnzahlHolzVerkaufen"  TextChanged="OnTextChanged" LostFocus="OnLostFocus"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- End Left Column -->
+
+                        <!-- KAUFEN RIGHT COLUMN-->
+
+                        <!-- Zelle 1 -->
+                        <StackPanel Grid.Column="1" Style="{StaticResource Zelle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="pack://application:,,,/images/RessourcenIcons/Broticon.png" Width="100"   />
+                                <TextBox x:Name="AnzahlBrotVerkaufen"  TextChanged="OnTextChanged" LostFocus="OnLostFocus" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Zelle 2 -->
+                        <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource Zelle}" >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="pack://application:,,,/images/RessourcenIcons/MilchIcon.png" Height="80" Width="100"  />
+                                <TextBox x:Name="AnzahlMilchVerkaufen"  TextChanged="OnTextChanged" LostFocus="OnLostFocus" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Verkaufen Right Column -->
+                    </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Kalkulationsbereich -->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2.7*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock x:Name="DisplaySteinVPreis" Text="Stein: " />
+                            <TextBlock x:Name="DisplayEisenVPreis" Text="Eisen: " />
+                            <TextBlock x:Name="DisplayHolzVPreis" Text="Holz: " />
+                            <TextBlock x:Name="DisplayBrotVPreis" Text="Brot: " />
+                            <TextBlock x:Name="DisplayMilchVPreis" Text="Milch: " />
+                            <TextBlock x:Name="DisplayGesamtVPreis" Text="Summe: " Foreground="Red" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                            <Button Content="Verkaufen" Width="150" Height="30" BorderThickness="0" Background="Bisque" Foreground="Tomato" FontWeight="SemiBold" FontSize="17" Click="OnVerkaufenClick"/>
+                        </StackPanel>
+
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
             </TabItem>
         </TabControl>
       

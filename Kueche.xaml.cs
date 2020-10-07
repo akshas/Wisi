@@ -20,6 +20,7 @@ namespace WiSi
     public partial class Kueche : Window
     {
         public bool canClose = false;
+        public bool hidden = true;
         public Kueche()
         {
             InitializeComponent();

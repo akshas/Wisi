@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Klassen\DBConnection.cs" />
+    <Compile Include="Klassen\Rathaus.cs" />
     <Compile Include="Klassen\Ressource.cs" />
     <Compile Include="MartkplatzWindow.xaml.cs">
       <DependentUpon>MartkplatzWindow.xaml</DependentUpon>
@@ -163,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\soup_spoon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markt3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

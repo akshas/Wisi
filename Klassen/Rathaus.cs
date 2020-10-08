@@ -22,6 +22,10 @@ namespace WiSi.Klassen
         public override GebaeudePosition Position 
         {
             get => _position;
+            set
+            {
+
+            }
         }
 
         public Rathaus(string name)

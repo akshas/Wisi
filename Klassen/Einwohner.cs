@@ -30,20 +30,21 @@ namespace WiSi
 
     class Einwohner : INotifyPropertyChanged
     {
-        private Koordinaten _koordinaten;
-        public string Position { get; set; }
-        public Koordinaten koordinaten { get => _koordinaten; private set => _koordinaten = value; }
-        public Pfad pfad { get; private set;}
+        public Koordinaten Position = new Koordinaten();
+        public Pfad ziel { get; set;}
+
+
 
         public Rectangle Form { get; set; }
         public int Id { get; set; }
 
         public static int Anzahl { get; set; } = 0;
+        public static int variable = 0;
 
         int Arbeitsgeschwindigkeit = 5;
         int BrotProTick = 1;
         double MilchProTick = 0.5;
-        private static int StartAnzahl = 5;
+        public static int StartAnzahl { get; private set; } =  3;
 
         public static List<Einwohner> EinwohnerList = new List<Einwohner>();
 
@@ -54,10 +55,6 @@ namespace WiSi
         }
         public Einwohner(int index)
         {
-            //_koordinaten.x = 3;
-            //_koordinaten.y = 5;
-
-            Gehen(pfad.start, pfad.ziel);
 
             Id = index;
             Form = new Rectangle
@@ -68,15 +65,19 @@ namespace WiSi
                 Name = "Einwohner_" + Id
             };
 
+            Position.x = 400 + variable;
+            Position.y = 300;
             EinwohnerList.Add(this);
             Anzahl++;
+            variable += 50;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+    
         public void Gehen(Koordinaten start, Koordinaten ziel)
         {
-            start.x = 20;
+
         }
 
         public void Arbeiten()
@@ -98,18 +99,6 @@ namespace WiSi
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        }
-
-
-        /// <summary>
-        ///   3 erste Einwohner beim Spielstart erzeugen
-        /// </summary>
-        public static void StartEinwohnerErzeugen()
-        {
-            for (int i = 1; i <= StartAnzahl; i++)
-            {
-                new Einwohner(i);
-            }
         }
     }
 }

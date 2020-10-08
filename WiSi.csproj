@@ -55,9 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IBaubar.cs" />
     <Compile Include="Klassen\DBConnection.cs" />
     <Compile Include="Klassen\Rathaus.cs" />
     <Compile Include="Klassen\Ressource.cs" />
+    <Compile Include="Klassen\Wohnhaus.cs" />
     <Compile Include="MartkplatzWindow.xaml.cs">
       <DependentUpon>MartkplatzWindow.xaml</DependentUpon>
     </Compile>

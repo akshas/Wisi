@@ -23,8 +23,8 @@ namespace WiSi
         ImageBrush element = new ImageBrush();
         public Rectangle Bild;
 
+        public GebaeudePosition Position = new GebaeudePosition();
         abstract public string ImagePath { get;}
-        abstract public GebaeudePosition Position { get; }
         public Gebaeude()
         {
             element.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.Absolute));

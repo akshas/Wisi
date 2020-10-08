@@ -27,16 +27,28 @@ namespace WiSi
         DispatcherTimer clock = new DispatcherTimer();
         string ImagePath = @"pack://application:,,,/images\townHall.png";
 
+        // == Einwohner Variables ==
+        Button bewegbarerEinwohner;
+        bool EinwohnerDarfSichBewegen = false;
+       
+        // === Wohnhaus ===
+        Wohnhaus wohnhaus;
+        bool BaustelleIstVorbereitet = false;
+        // Wohnhaus Button
+        Button whBtn;
+
         Rathaus rathaus;
         MartkplatzWindow markt;
-        Kueche kueche = new Kueche();
 
+        // == Subwindows ==
+        Kueche kueche = new Kueche();
         RessourcenWindow res = new RessourcenWindow();
 
 
-        int EinwohnerLeftPos = 420;
-        int EinwohnerTopPos = 285;
 
+        /// <summary>
+        /// Connection
+        /// </summary>
         DBConnection conn = new DBConnection();
         
         public MainWindow()
@@ -90,6 +102,30 @@ namespace WiSi
                 CreateElement(ImagePath);
             }
         }
+
+        private void CanvasClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (EinwohnerDarfSichBewegen)
+            {
+                Canvas.SetLeft(bewegbarerEinwohner, Mouse.GetPosition(MainCanvas).X);
+                Canvas.SetTop(bewegbarerEinwohner, Mouse.GetPosition(MainCanvas).Y);
+            }
+
+            if (BaustelleIstVorbereitet)
+            {
+                Canvas.SetLeft(whBtn, Mouse.GetPosition(MainCanvas).X);
+                Canvas.SetTop(whBtn, Mouse.GetPosition(MainCanvas).Y);
+                MainCanvas.Children.Add(whBtn);
+                //wohnhaus.Position.top = Mouse.GetPosition(MainCanvas).X;
+                //wohnhaus.Position.top = Mouse.GetPosition(MainCanvas).Y;
+                BaustelleIstVorbereitet = false;
+            }
+        }
+        private void CanvasRightClicked(object sender, MouseButtonEventArgs e)
+        {
+            EinwohnerDarfSichBewegen = false;
+            BaustelleIstVorbereitet = false;
+        }
         private void CreateElement(string ImagePath)
         {
             Customcolor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
@@ -120,6 +156,11 @@ namespace WiSi
         }
         #endregion
 
+        /// <summary>
+        /// MENU BUTTON CLICKED!!!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuButtonClicked(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -130,7 +171,8 @@ namespace WiSi
                     ImagePath = @"C:\Users\alex\source\repos\WiSi\WiSi\images\Rotes_Rathaus.png";
                     break;
                 case "Haus":
-                    ImagePath = @"C:\Users\alex\source\repos\WiSi\WiSi\images\house.png";
+                    //ImagePath = @"C:\Users\alex\source\repos\WiSi\WiSi\images\house.png";
+                    WohnhausBauen();
                     break;
                 case "Kueche":
                     if (kueche.hidden)
@@ -167,19 +209,52 @@ namespace WiSi
                     var text = WorkerBlock.Children.OfType<TextBlock>();
                     text.ToArray()[0].Text = Einwohner.Anzahl.ToString();
                     break;
+
             }
         }
 
 
         #region Erzeugen Elemente
+
+        private void WohnhausBauen()
+        {
+            whBtn = new Button();
+            wohnhaus = new Wohnhaus();
+            whBtn.Content = wohnhaus.Bild;
+            whBtn.Name = "Wohnhaus_" + wohnhaus.Id;
+            BaustelleIstVorbereitet = true;
+        }
+
+        /// <summary>
+        /// Erste 3 Einwohner erzeugen
+        /// </summary>
+        private void StartEinwohnerErzeugen()
+        {
+            for (int i = 1; i <= Einwohner.StartAnzahl; i++)
+            {
+                EinwhonerErzeugen();
+            }
+        }
+
         /// <summary>
         /// Einwohner Erzeugen
         /// </summary>
         private void EinwhonerErzeugen()
         {
-            if (Ressource.Brot.Anzahl > (Einwohner.Anzahl * 60) && Ressource.Milch.Anzahl > (Einwohner.Anzahl * 60))
+            if ((Ressource.Brot.Anzahl > (Einwohner.Anzahl * 60) && Ressource.Milch.Anzahl > (Einwohner.Anzahl * 60)) && Einwohner.Anzahl > (Wohnhaus.Anzahl * Einwohner.StartAnzahl))
             {
-                new Einwohner(Einwohner.Anzahl + 1);
+                Button EwBtn = new Button();
+                Einwohner newEinwohner = new Einwohner(Einwohner.Anzahl + 1);
+                EwBtn.Width = newEinwohner.Form.Width;
+                EwBtn.Height = newEinwohner.Form.Height;
+                EwBtn.Background = newEinwohner.Form.Fill;
+                EwBtn.Name = "Einwohner_" + newEinwohner.Id;
+                EwBtn.Click += EinwohnerClicked;
+                EwBtn.MouseRightButtonUp += BewegbarkeitLoeschen;
+                Canvas.SetLeft(EwBtn, newEinwohner.Position.x);
+                Canvas.SetTop(EwBtn, newEinwohner.Position.y);
+
+                MainCanvas.Children.Add(EwBtn);
             }
             else
             {
@@ -187,6 +262,36 @@ namespace WiSi
             }
         }
 
+
+        /// <summary>
+        ///  Einwohner clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EinwohnerClicked(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            bewegbarerEinwohner = btn;
+
+            EinwohnerDarfSichBewegen = true;
+
+        }
+        /// <summary>
+        /// Nich Bewegen!                 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BewegbarkeitLoeschen(object sender, MouseButtonEventArgs e)
+        {
+            EinwohnerDarfSichBewegen = false;
+        }
+
+
+        //-----------------------------------------------------------------
+        /// <summary>
+        /// Marktplatz
+        /// </summary>
         private void MarktplatzErzeugen() {
 
             Button mpBtn = new Button();
@@ -238,6 +343,7 @@ namespace WiSi
         {
             InitializeComponent();
 
+            MainCanvas.Focus();
             // -- Rathaus --
             RathausErzeugen();
 
@@ -248,22 +354,9 @@ namespace WiSi
             MarktplatzErzeugen();
 
             // -- Einwohner --
-            Einwohner.StartEinwohnerErzeugen();
+            StartEinwohnerErzeugen();
             WorkersAnzahlText.Text = Einwohner.Anzahl.ToString();
-            foreach (Einwohner mensch in Einwohner.EinwohnerList)
-            {
-                //mensch.Form = new Rectangle
-                //{
-                //    Width = 30,
-                //    Height = 30,
-                //    Fill = Brushes.Aqua
-                //};
 
-                Canvas.SetLeft(mensch.Form, EinwohnerLeftPos);
-                Canvas.SetTop(mensch.Form, EinwohnerTopPos);
-                MainCanvas.Children.Add(mensch.Form);
-                EinwohnerLeftPos += 50;
-            }
 
             // -- Timer --
             clock.Start();
@@ -274,6 +367,7 @@ namespace WiSi
         {
             clock.Stop();
         }
+
 
     }
 }

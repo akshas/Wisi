@@ -13,7 +13,7 @@
             <Setter Property="Background" Value="Transparent" />
         </Style>
     </Window.Resources>
-        <Canvas x:Name="MainCanvas" Background="LightYellow" MouseMove="OnMouseMove" Focusable="True" MouseLeftButtonDown="AddOrRemoveItems" >
+        <Canvas x:Name="MainCanvas" Background="LightYellow" MouseMove="OnMouseMove" Focusable="True" MouseLeftButtonDown="CanvasClicked" MouseRightButtonDown="CanvasRightClicked">
             
             <StackPanel Canvas.Right="10" Orientation="Horizontal">
                 <TextBlock x:Name="displayLeft"/>

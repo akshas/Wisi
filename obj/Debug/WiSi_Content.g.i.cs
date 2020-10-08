@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/markt3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("wisi.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("wisi_log.ldf")]
 
 

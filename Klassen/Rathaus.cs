@@ -21,10 +21,13 @@ namespace WiSi.Klassen
         private GebaeudePosition _position;
         public override GebaeudePosition Position 
         {
-            get => _position;
+            get
+            {
+                return _position;
+            }
             set
             {
-
+                _position = value;
             }
         }
 

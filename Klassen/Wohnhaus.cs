@@ -12,7 +12,14 @@ namespace WiSi.Klassen
         public string _img = "pack://application:,,,/images/house.png";
         public override string ImagePath { get => _img;}
 
+        private int _holzKosten = 60;
+        private int _eisenKosten = 40;
+        private int _steinKosten = 70;
+
         private GebaeudePosition _position;
+        private Kosten _kosten;
+
+        public Kosten kosten { get => _kosten; }
         public int Id { get; set; }
         public static int Anzahl = 0;
         public static List<Wohnhaus> Wohnhaeuser = new List<Wohnhaus>();
@@ -21,8 +28,8 @@ namespace WiSi.Klassen
             get => _position;
             set
             {
-                _position.left = Position.left;
-                _position.top = Position.top;
+                _position = value;
+                
             }
         }
 
@@ -31,6 +38,9 @@ namespace WiSi.Klassen
             Anzahl++;
             Id = Anzahl;
             Wohnhaeuser.Add(this);
+            _kosten.HolzKosten = _holzKosten;
+            _kosten.EisenKosten = _eisenKosten;
+            _kosten.SteinKosten = _steinKosten;
         }
 
         public Wohnhaus(int left, int top)

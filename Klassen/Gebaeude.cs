@@ -18,12 +18,10 @@ namespace WiSi
     abstract class Gebaeude
     {
         //public int Level { get; set; }
-        //abstract public int Anzahl{get; set;}
-        //abstract public int Fassungsvermoegen { get; set; }
         ImageBrush element = new ImageBrush();
         public Rectangle Bild;
 
-        public GebaeudePosition Position = new GebaeudePosition();
+       abstract public GebaeudePosition Position { get; set; }
         abstract public string ImagePath { get;}
         public Gebaeude()
         {

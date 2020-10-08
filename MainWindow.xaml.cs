@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,16 +70,19 @@ namespace WiSi
         }
         private void MainEventTimer(object sender, EventArgs e)
         {
-
-            foreach (Einwohner mensch in Einwohner.EinwohnerList)
+            Task.Run(() => 
             {
-                mensch.Essen(Ressource.Brot);
-                mensch.Essen(Ressource.Milch);
-            }
-            if (Ressource.Brot.Anzahl < 0 || Ressource.Milch.Anzahl < 0)
-            {
-                EndGame();
-            }
+                foreach (Einwohner mensch in Einwohner.EinwohnerList)
+                {
+                    Thread.Sleep(500);
+                    mensch.Essen(Ressource.Brot);
+                    mensch.Essen(Ressource.Milch);
+                }
+                if (Ressource.Brot.Anzahl < 0 || Ressource.Milch.Anzahl < 0)
+                {
+                    EndGame();
+                }
+            });
         }
 
 
@@ -116,8 +120,15 @@ namespace WiSi
                 Canvas.SetLeft(whBtn, Mouse.GetPosition(MainCanvas).X);
                 Canvas.SetTop(whBtn, Mouse.GetPosition(MainCanvas).Y);
                 MainCanvas.Children.Add(whBtn);
-                //wohnhaus.Position.top = Mouse.GetPosition(MainCanvas).X;
-                //wohnhaus.Position.top = Mouse.GetPosition(MainCanvas).Y;
+                GebaeudePosition pos = new GebaeudePosition();
+                pos.left = (int)Mouse.GetPosition(MainCanvas).X;
+                pos.top = (int)Mouse.GetPosition(MainCanvas).Y;
+                Ressource.Stein.Anzahl -= wohnhaus.kosten.SteinKosten;
+                Ressource.Eisen.Anzahl -= wohnhaus.kosten.EisenKosten;
+                Ressource.Holz.Anzahl -= wohnhaus.kosten.HolzKosten;
+                wohnhaus.Position = pos;
+
+
                 BaustelleIstVorbereitet = false;
             }
         }
@@ -241,7 +252,7 @@ namespace WiSi
         /// </summary>
         private void EinwhonerErzeugen()
         {
-            if ((Ressource.Brot.Anzahl > (Einwohner.Anzahl * 60) && Ressource.Milch.Anzahl > (Einwohner.Anzahl * 60)) && Einwohner.Anzahl > (Wohnhaus.Anzahl * Einwohner.StartAnzahl))
+            if ((Ressource.Brot.Anzahl > (Einwohner.Anzahl * 60) && Ressource.Milch.Anzahl > (Einwohner.Anzahl * 60)) && Einwohner.Anzahl < ((Wohnhaus.Anzahl + 1) * 3))
             {
                 Button EwBtn = new Button();
                 Einwohner newEinwohner = new Einwohner(Einwohner.Anzahl + 1);

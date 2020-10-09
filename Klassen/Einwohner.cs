@@ -37,6 +37,7 @@ namespace WiSi
 
         public Rectangle Form { get; set; }
         public int Id { get; set; }
+        public static int Geschwindigkeit { get; set; } = 8;
 
         public static int Anzahl { get; set; } = 0;
         public static int variable = 0;

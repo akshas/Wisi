@@ -34,6 +34,7 @@ namespace WiSi
         public static DataTable ress;
 
         public static ObservableCollection<Ressource> ResList = new ObservableCollection<Ressource>();
+        public static List<Ressource> zumBauen = new List<Ressource>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,7 +45,6 @@ namespace WiSi
             Name = (string)row["Name"];
             Anzahl = (int)row["LagerAnzahl"];
             ResList.Add(this);
-            //MessageBox.Show(this.Einkaufspreis.ToString()); 
         }
 
         public static void RessourcenErzeugen()
@@ -57,10 +57,19 @@ namespace WiSi
             Eisen = new Ressource(4){ Einkaufspreis = 7, Verkaufspreis = 6.5};
             Holz = new Ressource(5){ Einkaufspreis = 4, Verkaufspreis = 3.5};
             Gold = new Ressource(6){ Einkaufspreis = 6, Verkaufspreis = 5.5};
+
+            zumBauen.Add(Stein);
+            zumBauen.Add(Eisen);
+            zumBauen.Add(Holz);
         }
         public void OnPropCh([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public void gewinnen(Ressource res)
+        {
+            
         }
     }
 }

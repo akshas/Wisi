@@ -16,6 +16,6 @@ namespace WiSi.Interfaces
     {
         Kosten kosten { get; }
 
-        void Bauen();
+        void Bauen(List<Ressource> res);
     }
 }

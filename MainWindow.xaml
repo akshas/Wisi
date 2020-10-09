@@ -19,7 +19,7 @@
                 <TextBlock x:Name="displayLeft"/>
                 <TextBlock x:Name="displayTop"/>
             </StackPanel>
-
+            
             <StackPanel x:Name="Menu" >
 
                 <Button x:Name="Rathaus" Click="MenuButtonClicked">
@@ -42,7 +42,24 @@
                 </Button>
 
             </StackPanel>
-            <StackPanel  Canvas.Left="400" Margin="0 30" Orientation="Horizontal" HorizontalAlignment="Center">
+            <!-- Wald -->
+            <StackPanel Canvas.Right="50" Canvas.Top="50">
+                <Button x:Name="BergBtn" Click="OnRessourceClicked">
+                    <Image  Source="pack://application:,,,/images/Berg.png" Width="300"/>
+                </Button>
+            </StackPanel>
+            <!-- Teich -->
+        <StackPanel Canvas.Left="50" Canvas.Bottom="250">
+            <Button x:Name="TeichBtn" Click="OnRessourceClicked">
+                <Image  Source="pack://application:,,,/images/Teich.png" Width="200"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Canvas.Right="150" Canvas.Bottom="50">
+            <Button x:Name="WaldBtn" Click="OnRessourceClicked">
+                <Image  Source="pack://application:,,,/images/forest.png" Width="300"/>
+            </Button>
+        </StackPanel>
+        <StackPanel  Canvas.Left="400" Margin="0 30" Orientation="Horizontal" HorizontalAlignment="Center">
                 <ListBox x:Name="RessourcenDisplay">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

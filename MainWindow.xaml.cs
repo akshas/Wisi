@@ -29,7 +29,7 @@ namespace WiSi
         string ImagePath = @"pack://application:,,,/images\townHall.png";
 
         // == Einwohner Variables ==
-        Button bewegbarerEinwohner;
+        Button bewegbarerEinwohner = new Button();
         bool EinwohnerDarfSichBewegen = false;
        
         // === Wohnhaus ===
@@ -78,6 +78,7 @@ namespace WiSi
                     mensch.Essen(Ressource.Brot);
                     mensch.Essen(Ressource.Milch);
                 }
+
                 if (Ressource.Brot.Anzahl < 0 || Ressource.Milch.Anzahl < 0)
                 {
                     EndGame();
@@ -89,7 +90,7 @@ namespace WiSi
 
       
         
-        #region Canvas Bearbeitung ---------------------------------
+        #region Canvas  ---------------------------------
 
 
 
@@ -123,9 +124,7 @@ namespace WiSi
                 GebaeudePosition pos = new GebaeudePosition();
                 pos.left = (int)Mouse.GetPosition(MainCanvas).X;
                 pos.top = (int)Mouse.GetPosition(MainCanvas).Y;
-                Ressource.Stein.Anzahl -= wohnhaus.kosten.SteinKosten;
-                Ressource.Eisen.Anzahl -= wohnhaus.kosten.EisenKosten;
-                Ressource.Holz.Anzahl -= wohnhaus.kosten.HolzKosten;
+                wohnhaus.Bauen(Ressource.zumBauen);
                 wohnhaus.Position = pos;
 
 
@@ -136,17 +135,16 @@ namespace WiSi
         {
             EinwohnerDarfSichBewegen = false;
             BaustelleIstVorbereitet = false;
+            bewegbarerEinwohner.Background = Brushes.Aqua;
         }
         private void CreateElement(string ImagePath)
         {
-            Customcolor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
             ImageBrush element = new ImageBrush();
             element.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.Absolute));
             Rectangle newRect = new Rectangle
             {
                 Width = 50,
                 Height = 50,
-                //Fill = Customcolor,
                 Fill = element,
 
                 StrokeThickness = 3,
@@ -265,6 +263,7 @@ namespace WiSi
                 Canvas.SetLeft(EwBtn, newEinwohner.Position.x);
                 Canvas.SetTop(EwBtn, newEinwohner.Position.y);
 
+                Canvas.SetZIndex(EwBtn, 3);
                 MainCanvas.Children.Add(EwBtn);
             }
             else
@@ -281,11 +280,13 @@ namespace WiSi
         /// <param name="e"></param>
         private void EinwohnerClicked(object sender, RoutedEventArgs e)
         {
+            bewegbarerEinwohner.Background = Brushes.Aqua;
             Button btn = (Button)sender;
 
             bewegbarerEinwohner = btn;
-
+            bewegbarerEinwohner.Background = Brushes.Tomato;
             EinwohnerDarfSichBewegen = true;
+            
 
         }
         /// <summary>
@@ -295,6 +296,8 @@ namespace WiSi
         /// <param name="e"></param>
         private void BewegbarkeitLoeschen(object sender, MouseButtonEventArgs e)
         {
+            Button btn = (Button)sender;
+            btn.Background = Brushes.Aqua;
             EinwohnerDarfSichBewegen = false;
         }
 
@@ -379,6 +382,25 @@ namespace WiSi
             clock.Stop();
         }
 
+        private void OnRessourceClicked(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            switch (btn.Name)
+            {
+                case "BergBtn":
+                    
+                    break;
+                case "TeichBtn":
 
+                    break;
+
+                case "WaldBtn":
+
+                    break;
+
+
+
+            }
+        }
     }
 }

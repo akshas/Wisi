@@ -45,7 +45,7 @@ namespace WiSi
 
             Position = new MarktPosition();
             Position.left = 600;
-            Position.top = 500;
+            Position.top = 400;
         }
 
         public void Kaufen(Dictionary<Ressource, int> zumKaufen)

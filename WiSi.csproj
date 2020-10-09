@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interfaces\IBaubar.cs" />
+    <Compile Include="Klassen\Arbeiter.cs" />
     <Compile Include="Klassen\DBConnection.cs" />
     <Compile Include="Klassen\Rathaus.cs" />
     <Compile Include="Klassen\Ressource.cs" />
@@ -140,31 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\house.png" />
-    <Resource Include="images\sprites\cover-iso-house.png" />
-    <Resource Include="images\sprites\Isometric-Houses-1-flip.png" />
-    <Resource Include="images\sprites\Isometric-Houses-1.png" />
-    <Resource Include="images\sprites\Isometric-Houses-2-flip.png" />
-    <Resource Include="images\sprites\Isometric-Houses-2.png" />
-    <Resource Include="images\sprites\Isometric-Houses-3-flip.png" />
-    <Resource Include="images\sprites\Isometric-Houses-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Rotes_Rathaus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\kueche.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\worker.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Markt2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\townHall.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Markt.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Subwindows\" />
@@ -186,6 +168,9 @@
     <Resource Include="images\markt3.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\forest.png" />
+    <Resource Include="images\Teich.png" />
+    <Resource Include="images\Berg.png" />
     <Content Include="Wisi.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

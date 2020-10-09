@@ -16,7 +16,7 @@ namespace WiSi
         public static DataTable Ressourcen = new DataTable();
 
         static SqlCommand scomm;
-        string QueryString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\MY_FILES\CSProjects\Apps\Wisi\Wisi.mdf;Integrated Security=True";
+        string QueryString = @"Data Source=DESKTOP-BI5DCV4\SQLEXPRESS;Initial Catalog=BusinessSimulation;Integrated Security=True";
          public DBConnection()
         {
             conn = new SqlConnection(QueryString);

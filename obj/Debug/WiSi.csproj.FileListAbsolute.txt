@@ -43,3 +43,6 @@ D:\MY_FILES\CSProjects\Apps\Wisi\obj\Debug\WiSi.g.resources
 D:\MY_FILES\CSProjects\Apps\Wisi\obj\Debug\WiSi.Properties.Resources.resources
 D:\MY_FILES\CSProjects\Apps\Wisi\obj\Debug\WiSi.csproj.GenerateResource.cache
 D:\MY_FILES\CSProjects\Apps\Wisi\obj\Debug\WiSi.csproj.CoreCompileInputs.cache
+C:\Users\alex\source\repos\WiSi\WiSi\bin\Debug\Wisi.mdf
+C:\Users\alex\source\repos\WiSi\WiSi\bin\Debug\Wisi_log.ldf
+C:\Users\alex\source\repos\WiSi\WiSi\obj\Debug\WiSi_Content.g.cs
